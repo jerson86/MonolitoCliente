@@ -12,14 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClienteServiceImpl implements ClienteService{
 
     @Autowired
     private ClienteRepository clienteRepository;
-    private Message message;
+    @Autowired
     private ModelMapper modelMapper;
     @Override
     public ResponseEntity<Object> getAllClientes() {
@@ -61,7 +60,6 @@ public class ClienteServiceImpl implements ClienteService{
 
         // convert entity to DTO
         ClienteDTO clienteResponse = modelMapper.map(cliente, ClienteDTO.class);
-        System.out.println(clienteResponse.toString());
         return ResponseEntity.ok().body(clienteResponse);
     }
 
