@@ -1,16 +1,18 @@
 package com.pragma.cliente.service;
 
-import com.pragma.cliente.dto.ClienteDTO;
+import com.pragma.cliente.dto.ImagenDTO;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface ImagenService {
-    ResponseEntity<Object> getAllClientes();
+    ResponseEntity<List<ImagenDTO>> getAllImagenes();
 
-    ResponseEntity<ClienteDTO> createCliente(ClienteDTO clienteDTO);
+    ResponseEntity<ImagenDTO> createImagen(ImagenDTO imagenDTO);
 
-    ResponseEntity<ClienteDTO> updateCliente(long id, ClienteDTO clienteDTO);
+    ResponseEntity<ImagenDTO> updateImagen(long id, ImagenDTO imagenDTO);
 
-    ResponseEntity<ClienteDTO> deleteCliente(long id);
+    ResponseEntity<ImagenDTO> deleteImagen(long id);
 
-    ResponseEntity<ClienteDTO> getClienteById(long id);
+    ResponseEntity<ImagenDTO> getImagenById(long id);
 }

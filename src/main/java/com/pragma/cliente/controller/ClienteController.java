@@ -1,7 +1,6 @@
 package com.pragma.cliente.controller;
 
 import com.pragma.cliente.dto.ClienteDTO;
-import com.pragma.cliente.entity.Cliente;
 import com.pragma.cliente.service.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

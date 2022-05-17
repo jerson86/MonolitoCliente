@@ -4,10 +4,8 @@ import com.pragma.cliente.dto.ClienteDTO;
 import com.pragma.cliente.entity.Cliente;
 import com.pragma.cliente.exception.ResourceNotFoundException;
 import com.pragma.cliente.repository.ClienteRepository;
-import com.pragma.cliente.util.Message;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
