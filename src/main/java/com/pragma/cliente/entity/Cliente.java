@@ -27,4 +27,7 @@ public class Cliente {
     private String ciudadNacimiento;
     @CreationTimestamp
     private Instant fechaRegistro;
+
+    //@OneToOne(cascade =  CascadeType.ALL, mappedBy = "cliente")
+    //private Imagen imagen;
 }

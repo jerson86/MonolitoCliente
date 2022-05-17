@@ -1,6 +1,7 @@
 package com.pragma.cliente.dto;
 
 import com.pragma.cliente.entity.ETipoDocumento;
+import com.pragma.cliente.entity.Imagen;
 import lombok.Data;
 import java.time.Instant;
 
@@ -15,4 +16,5 @@ public class ClienteDTO{
     private short edad;
     private String ciudadNacimiento;
     private Instant fechaRegistro;
+    //private Imagen imagen;
 }

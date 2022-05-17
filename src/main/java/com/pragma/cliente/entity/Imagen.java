@@ -17,4 +17,7 @@ public class Imagen {
     @CreationTimestamp
     private Instant fechaRegistro;
     private long idCliente;
+    //@OneToOne
+    //@JoinColumn(name = "idCliente", nullable = false)
+    //private Cliente cliente;
 }

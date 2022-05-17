@@ -4,13 +4,11 @@ import com.pragma.cliente.dto.ImagenDTO;
 import com.pragma.cliente.service.ImagenServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-
+@RestController
 public class ImagenController {
 
     @Autowired
@@ -25,14 +23,19 @@ public class ImagenController {
         return imagenService.getImagenById(id);
     }
 
-    @RequestMapping(value = "api/imagenes", method = RequestMethod.POST)
-    public ResponseEntity<ImagenDTO> createCliente(@RequestBody ImagenDTO imagenDTO){
-        return imagenService.createImagen(imagenDTO);
+    @RequestMapping(value = "api/imagenes/{id}/{idCliente}", method = RequestMethod.GET)
+    public ResponseEntity<ImagenDTO> getImagenByIdCliente(@PathVariable Long idCliente){
+        return imagenService.getImagenByIdCliente(idCliente);
     }
 
-    @RequestMapping(value = "api/imagenes/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<ImagenDTO> updateImagen(@RequestBody ImagenDTO imagenDTO, @PathVariable Long id){
-        return imagenService.updateImagen(id,imagenDTO);
+    @RequestMapping(value = "api/imagenes/{idCliente}", method = RequestMethod.POST)
+    public ResponseEntity<ImagenDTO> createCliente(@RequestParam("foto") MultipartFile foto, @PathVariable Long idCliente){
+        return imagenService.createImagen(foto,idCliente);
+    }
+
+    @RequestMapping(value = "api/imagenes/{id}/{idCliente}", method = RequestMethod.PUT)
+    public ResponseEntity<ImagenDTO> updateImagen(@RequestParam("foto") MultipartFile foto, @PathVariable Long idCliente, @PathVariable Long id){
+        return imagenService.updateImagen(id, foto, idCliente);
     }
 
     @RequestMapping(value = "api/imagenes/{id}", method = RequestMethod.DELETE)

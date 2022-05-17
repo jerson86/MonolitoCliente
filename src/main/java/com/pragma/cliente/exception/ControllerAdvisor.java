@@ -14,7 +14,7 @@ public class ControllerAdvisor  {
     public ResponseEntity<Object> handleNotFoundException(
             ResourceNotFoundException ex, WebRequest request) {
 
-        return new ResponseEntity<>(new Message(HttpStatus.NOT_FOUND,"No hay registros", "El cliente no existe"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new Message(HttpStatus.NOT_FOUND,"No hay registros", "No se encontraron registros"), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
