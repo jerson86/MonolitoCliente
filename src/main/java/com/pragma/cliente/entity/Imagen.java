@@ -1,8 +1,10 @@
 package com.pragma.cliente.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Data
@@ -12,6 +14,7 @@ public class Imagen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String foto;
-    private String fechaRegistro;
+    @CreationTimestamp
+    private Instant fechaRegistro;
     private long idCliente;
 }

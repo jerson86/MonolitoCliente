@@ -7,13 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ClienteController {
     @Autowired
     ClienteServiceImpl clienteService = new ClienteServiceImpl();
 
     @RequestMapping(value = "api/clientes", method = RequestMethod.GET)
-    public ResponseEntity<Object> getAllClientes(){
+    public ResponseEntity<List<ClienteDTO>> getAllClientes(){
         return  clienteService.getAllClientes();
     }
 
@@ -23,17 +25,17 @@ public class ClienteController {
     }
 
     @RequestMapping(value = "api/clientes", method = RequestMethod.POST)
-    public Cliente createCliente(@RequestBody Cliente cliente){
-        return clienteService.createCliente(cliente);
+    public ResponseEntity<ClienteDTO> createCliente(@RequestBody ClienteDTO clienteDTO){
+        return clienteService.createCliente(clienteDTO);
     }
 
     @RequestMapping(value = "api/clientes/{id}", method = RequestMethod.PUT)
-    public Cliente updateCliente(@RequestBody Cliente cliente, @PathVariable Long id){
-        return clienteService.updateCliente(id,cliente);
+    public ResponseEntity<ClienteDTO> updateCliente(@RequestBody ClienteDTO clienteDTO, @PathVariable Long id){
+        return clienteService.updateCliente(id,clienteDTO);
     }
 
     @RequestMapping(value = "api/clientes/{id}", method = RequestMethod.DELETE)
-    public Cliente deleteCliente(@PathVariable Long id){
+    public ResponseEntity<ClienteDTO> deleteCliente(@PathVariable Long id){
         return clienteService.deleteCliente(id);
     }
 

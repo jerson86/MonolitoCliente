@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,37 +22,55 @@ public class ClienteServiceImpl implements ClienteService{
     @Autowired
     private ModelMapper modelMapper;
     @Override
-    public ResponseEntity<Object> getAllClientes() {
+    public ResponseEntity<List<ClienteDTO>> getAllClientes() {
         List<Cliente> clientes = clienteRepository.findAll();
-        if(clientes.isEmpty()){
-            return new ResponseEntity<>(new Message(HttpStatus.NOT_FOUND,"No hay registros", "No hay clientes registrados"), HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(clientes, HttpStatus.OK);
+        clientes.stream().findFirst().orElseThrow(()->
+                new ResourceNotFoundException("cliente",1L)
+        );
+        // convert entity to DTO
+        List<ClienteDTO> clienteDTOS= new ArrayList<>();
+        clientes.forEach(cliente -> {
+            ClienteDTO clienteResponse = modelMapper.map(cliente, ClienteDTO.class);
+            clienteDTOS.add(clienteResponse);
+        });
+
+        return ResponseEntity.ok().body(clienteDTOS);
     }
 
     @Override
-    public Cliente createCliente(Cliente cliente) {
-        return clienteRepository.save(cliente);
+    public ResponseEntity<ClienteDTO> createCliente(ClienteDTO clienteDTO) {
+        // convert DTO to Entity
+        Cliente clienteRequest = modelMapper.map(clienteDTO, Cliente.class);
+        clienteRepository.save(clienteRequest);
+        // convert entity to DTO
+        ClienteDTO clienteResponse = modelMapper.map(clienteRequest, ClienteDTO.class);
+        return ResponseEntity.ok().body(clienteResponse);
     }
 
     @Override
-    public Cliente updateCliente(long id, Cliente clienteUpd) {
+    public ResponseEntity<ClienteDTO> updateCliente(long id, ClienteDTO clienteDTO) {
         Cliente cliente = clienteRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("cliente",id));
+        // convert DTO to Entity
+        Cliente clienteRequest = modelMapper.map(clienteDTO, Cliente.class);
         cliente.setId(id);
-        cliente.setNombres(clienteUpd.getNombres());
-        cliente.setApellidos(clienteUpd.getApellidos());
-        //cliente.setTipoDocumento(clienteUpd.getTipoDocumento());
-        //cliente.setDocumento(clienteUpd.getDocumento());
-        cliente.setEdad(clienteUpd.getEdad());
-        cliente.setCiudadNacimiento(clienteUpd.getCiudadNacimiento());
-        return clienteRepository.save(cliente);
+        cliente.setNombres(clienteRequest.getNombres());
+        cliente.setApellidos(clienteRequest.getApellidos());
+        cliente.setEdad(clienteRequest.getEdad());
+        cliente.setCiudadNacimiento(clienteRequest.getCiudadNacimiento());
+        clienteRepository.save(cliente);
+        // convert entity to DTO
+        ClienteDTO clienteResponse = modelMapper.map(cliente, ClienteDTO.class);
+
+        return ResponseEntity.ok().body(clienteResponse);
     }
 
     @Override
-    public Cliente deleteCliente(long id) {
+    public ResponseEntity<ClienteDTO> deleteCliente(long id) {
         Cliente cliente = clienteRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("cliente",id));
         clienteRepository.delete(cliente);
-        return cliente;
+        // convert entity to DTO
+        ClienteDTO clienteResponse = modelMapper.map(cliente, ClienteDTO.class);
+        return ResponseEntity.ok().body(clienteResponse);
     }
 
     @Override
@@ -64,7 +83,10 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public List<Cliente> findByTipoDocumentoAndDocumento(String tipoDocumento, String documento) {
-        return clienteRepository.findByTipoDocumentoAndDocumento(tipoDocumento, documento);
+    public ResponseEntity<ClienteDTO> findByTipoDocumentoAndDocumento(String tipoDocumento, String documento) {
+        Cliente cliente = clienteRepository.findByTipoDocumentoAndDocumento(tipoDocumento, documento).orElseThrow(()-> new ResourceNotFoundException("cliente",1L));
+        // convert entity to DTO
+        ClienteDTO clienteResponse = modelMapper.map(cliente, ClienteDTO.class);
+        return ResponseEntity.ok().body(clienteResponse);
     }
 }
