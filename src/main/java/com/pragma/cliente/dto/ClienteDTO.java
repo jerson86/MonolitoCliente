@@ -15,6 +15,4 @@ public class ClienteDTO{
     private String documento;
     private short edad;
     private String ciudadNacimiento;
-    private Instant fechaRegistro;
-    //private Imagen imagen;
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 @RestController
 public class ImagenController {
@@ -30,7 +31,7 @@ public class ImagenController {
     }
 
     @RequestMapping(value = "api/imagenes/{idCliente}", method = RequestMethod.POST)
-    public ResponseEntity<ImagenDTO> createCliente(@RequestParam("foto") MultipartFile foto, @PathVariable Long idCliente){
+    public ResponseEntity<ImagenDTO> createImagen(@RequestParam("foto") MultipartFile foto, @PathVariable Long idCliente) throws IOException {
         return imagenService.createImagen(foto,idCliente);
     }
 
@@ -40,7 +41,7 @@ public class ImagenController {
     }
 
     @RequestMapping(value = "api/imagenes/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<ImagenDTO> deleteCliente(@PathVariable Long id){
+    public ResponseEntity<ImagenDTO> deleteImagen(@PathVariable Long id){
         return imagenService.deleteImagen(id);
     }
 }

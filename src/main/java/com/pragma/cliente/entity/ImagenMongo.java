@@ -2,20 +2,19 @@ package com.pragma.cliente.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.time.Instant;
-
-@Entity
 @Data
-@Table(name = "imagenes")
-public class Imagen {
+@Document(collection = "imagenes")
+public class ImagenMongo {
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
     private String foto;
     @CreationTimestamp
     private Instant fechaRegistro;
-    @OneToOne
-    @JoinColumn(name = "idCliente", nullable = false)
     private Cliente cliente;
+    private int seq;
 }
