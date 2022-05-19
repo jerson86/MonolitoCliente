@@ -18,5 +18,5 @@ public interface ImagenService {
 
     ResponseEntity<ImagenDTO> getImagenById(long id);
 
-    ResponseEntity<ImagenDTO> getImagenByIdCliente(long idCliente);
+    ResponseEntity<ImagenDTO> getImagenByCliente(ClienteDTO clienteDTO);
 }

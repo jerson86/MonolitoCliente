@@ -8,6 +8,6 @@ public class ImagenDTO {
     private long id;
     private String foto;
     private String fechaRegistro;
-    private long idCliente;
-    //private Cliente cliente;
+    //private long idCliente;
+    private Cliente cliente;
 }

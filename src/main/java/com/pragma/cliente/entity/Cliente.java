@@ -28,6 +28,6 @@ public class Cliente {
     @CreationTimestamp
     private Instant fechaRegistro;
 
-    //@OneToOne(cascade =  CascadeType.ALL, mappedBy = "cliente")
+    //@OneToOne(mappedBy = "cliente")
     //private Imagen imagen;
 }

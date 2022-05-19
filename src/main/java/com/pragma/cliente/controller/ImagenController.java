@@ -1,5 +1,6 @@
 package com.pragma.cliente.controller;
 
+import com.pragma.cliente.dto.ClienteDTO;
 import com.pragma.cliente.dto.ImagenDTO;
 import com.pragma.cliente.service.ImagenServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class ImagenController {
     }
 
     @RequestMapping(value = "api/imagenes/{id}/{idCliente}", method = RequestMethod.GET)
-    public ResponseEntity<ImagenDTO> getImagenByIdCliente(@PathVariable Long idCliente){
-        return imagenService.getImagenByIdCliente(idCliente);
+    public ResponseEntity<ImagenDTO> getImagenByIdCliente(@RequestBody ClienteDTO clienteDTO){
+        return imagenService.getImagenByCliente(clienteDTO);
     }
 
     @RequestMapping(value = "api/imagenes/{idCliente}", method = RequestMethod.POST)
